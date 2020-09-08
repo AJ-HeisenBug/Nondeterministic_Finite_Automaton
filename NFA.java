@@ -19,8 +19,7 @@ import java.util.Map;
 
 public class NFA<S, A> {
     Map<String, Set<S>> transitions;
-
-
+	
     /**
      * Constructs the Nfa and assigns states.
      * @param states all NFA states
