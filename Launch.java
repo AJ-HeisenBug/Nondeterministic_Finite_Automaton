@@ -1,6 +1,8 @@
 /**
  * Class launch provides the required data for NFA.java
  * Also contains the main method
+ * 
+ * Best performance: java -XX:+UseParallelGC -Xms2048m -Xmx2048m Launch
  */
 
 import java.io.*;
