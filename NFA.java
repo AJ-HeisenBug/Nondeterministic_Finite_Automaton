@@ -12,19 +12,19 @@
  * @author Devops_Mika
  */
 
-import java.util.Set;
+import java.util.List;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class NFA<S, A> {
-    Map<String, Set<S>> transitions;
+    Map<String, List<S>> transitions;
 	
     /**
      * Constructs the Nfa and assigns states.
      * @param states all NFA states
      */
-	public NFA() {
+    public NFA() {
         this.transitions = new HashMap<>();
     }
 
@@ -35,14 +35,14 @@ public class NFA<S, A> {
      * @param p next state
      */
     public void addTransition(S q, A a, S p) {
-        String key = q + " " + a;
+        String key = q.toString() + a;
         if (!transitions.containsKey(key)) {
-            Set<S> tar = new HashSet<>();
+            List<S> tar = new ArrayList<>();
             tar.add(p);
             transitions.put(key, tar);
         }
         else{
-            Set<S> tar = transitions.get(key);
+            List<S> tar = transitions.get(key);
             tar.add(p);
             transitions.put(key, tar);
         }
@@ -54,18 +54,22 @@ public class NFA<S, A> {
      * @param w sequence of words
      * @return set of all reached final states
      */
-    public Set<S> simulate(S q, char[] w){
-        Set<S> ans = new HashSet<>();
+    public List<S> simulate(S q, char[] w){
+        List<S> ans = new ArrayList<>();
         ans.add(q);
         for(int index = 0; index < w.length; index++){
-            Set<S> H = new HashSet<>();
-	        for (S st : ans){
-	            String key = st + " " + w[index];
-                Set<S> tar = transitions.get(key);
-                if (tar != null) H.addAll(tar);
+            List<S> H = new ArrayList<>();
+            for (S st : ans){
+                String key = st.toString() + w[index];
+                List<S> tar = transitions.get(key);
+                if (tar != null) {
+                    for (S s : tar) {
+                        if(!H.contains(s)) H.add(s);
+                    }
+                }
             }
-	        ans = H;
+            ans = H;
         }
-	    return ans;
+        return ans;
     }
 }
