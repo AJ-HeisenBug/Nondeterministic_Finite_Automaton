@@ -9,7 +9,7 @@
  * 
  * The goal of this repo is to use datastructures in the best way possible to optimise the time complexity of the program. 
  * 
- * @author Devops_Mika
+ * @author AJ_DeBug
  */
 
 import java.util.List;
