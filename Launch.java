@@ -6,7 +6,7 @@
  */
 
 import java.io.*;
-import java.util.Set;
+import java.util.List;
 
 public class Launch<S, A> {
     /**
@@ -20,8 +20,9 @@ public class Launch<S, A> {
             while ((tmp = myReader.readLine()) != null) {
                 String[] data = tmp.split(" ");
                 nfa.addTransition(Integer.valueOf(data[0]), data[1], Integer.valueOf(data[2]));
+                
             }
-            myReader.close();
+            myReader.close(); 
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -57,7 +58,7 @@ public class Launch<S, A> {
         read_words(eingabe);   
         for (char[] e : eingabe){
             // long z = System.currentTimeMillis();
-            Set<Integer> reachable = nfa.simulate(7, e);
+            List<Integer> reachable = nfa.simulate(7, e);
             System.out.println(reachable);
             // System.out.println(System.currentTimeMillis()-z);
         }
